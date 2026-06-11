@@ -4,7 +4,8 @@
   "description": "Basic Node.js app for DevOps learning",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js"
+    "start": "node app.js",
+    "test": "node test/app.test.js"
   },
   "dependencies": {
     "express": "^5.1.0"
