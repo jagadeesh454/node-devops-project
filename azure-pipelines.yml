@@ -21,8 +21,8 @@ steps:
 
 - script: |
     echo "Build step completed"
-    displayName: 'Build Application'
+  displayName: 'Build Application'
 
 - script: |
     npm test
-    displayName: 'Run Unit Tests'
+  displayName: 'Run Unit Tests'
