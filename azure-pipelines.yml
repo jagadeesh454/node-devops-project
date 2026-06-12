@@ -36,6 +36,6 @@ steps:
 - script: echo "Security Scan"
   displayName: 'Security Scan'
 
-- script: docker build -t node-devops-project
+- script: docker build -t node-devops-project .
   displayName: 'Docker Build'
   
