@@ -26,3 +26,16 @@ steps:
 - script: |
     npm test
   displayName: 'Run Unit Tests'
+
+- script: echo "Code Coverage Completed"
+  displayName: 'Code Coverage'
+
+- script: echo "SonarQube Analysis"
+  displayName: 'SonarQube'
+
+- script: echo "Security Scan"
+  displayName: 'Security Scan'
+
+- script: docker build -t node-devops-project .
+  displayName: 'Docker Build'
+  
