@@ -37,7 +37,16 @@ steps:
   displayName: 'Security Scan'
 
 - script: |
-    pwd
-    ls -la
     docker build -t node-devops-project .
   displayName: 'Docker Build'
+
+- task: Docker@2
+  displayName: 'Docker Push'
+  inputs:
+    command: login
+    containerRegistry: 'dockerhub-connection'
+
+- script: |
+    docker tag node-devops-project jagadeesh1102/node-devops-project:latest
+    docker push jagadeesh1102/node-devops-project:latest
+  displayName: 'Push Image To Docker Hub'
