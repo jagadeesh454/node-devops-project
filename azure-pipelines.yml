@@ -47,6 +47,6 @@ steps:
     containerRegistry: 'dockerhub-connection'
 
 - script: |
-    docker tag node-devops-project jagadeesh1102/node-devops-project:latest
-    docker push jagadeesh1102/node-devops-project:latest
+    docker tag node-devops-project jagadeesh1102/node-devops-project:$(Build.BuildId)
+    docker push jagadeesh1102/node-devops-project:$(Build.BuildId)
   displayName: 'Push Image To Docker Hub'
