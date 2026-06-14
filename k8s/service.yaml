@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+
+metadata:
+  name: node-devops-service
+
+spec:
+  type: LoadBalancer
+
+  selector:
+    app: node-devops
+
+  ports:
+  - port: 80
+    targetPort: 3000
