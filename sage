@@ -1,0 +1,32 @@
+warning: in the working copy of 'app.js', LF will be replaced by CRLF the next time Git touches it
+[1mdiff --git a/app.js b/app.js[m
+[1mindex 55a2d15..4019baa 100644[m
+[1m--- a/app.js[m
+[1m+++ b/app.js[m
+[36m@@ -1,18 +1,18 @@[m
+[31m-const express = require('express');[m
+[32m+[m[32mconst express = require("express");[m
+ [m
+ const app = express();[m
+ const PORT = process.env.PORT || 3000;[m
+ [m
+[31m-app.get('/', (req, res) => {[m
+[31m-    res.send('Hello DevOps World');[m
+[32m+[m[32mapp.get("/", (req, res) => {[m
+[32m+[m[32m  res.send("I Love Chittitalli and Kannaya");[m
+ });[m
+ [m
+[31m-app.get('/health', (req, res) => {[m
+[31m-    res.status(200).json({[m
+[31m-        status: 'UP'[m
+[31m-    });[m
+[32m+[m[32mapp.get("/health", (req, res) => {[m
+[32m+[m[32m  res.status(200).json({[m
+[32m+[m[32m    status: "UP",[m
+[32m+[m[32m  });[m
+ });[m
+ [m
+ app.listen(PORT, () => {[m
+[31m-    console.log(`Application running on port ${PORT}`);[m
+[32m+[m[32m  console.log(`Application running on port ${PORT}`);[m
+ });[m

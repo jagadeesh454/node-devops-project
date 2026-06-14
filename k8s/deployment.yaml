@@ -19,7 +19,8 @@ spec:
     spec:
       containers:
       - name: node-devops
-        image: jagadeesh1102/node-devops-project:v2
+        image: jagadeesh1102/node-devops-project:latest
+        imagePullPolicy: Always
 
         ports:
         - containerPort: 3000
