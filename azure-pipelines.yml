@@ -11,54 +11,58 @@ pool:
 
 steps:
 
+# Install Node.js
 - task: NodeTool@0
   inputs:
     versionSpec: '20.x'
   displayName: 'Install Node.js'
 
+# Install Dependencies
 - script: npm install
   displayName: 'Install Dependencies'
 
+# Build Application
 - script: |
     echo "Build step completed"
   displayName: 'Build Application'
 
+# Run Unit Tests
 - script: |
     npm test
   displayName: 'Run Unit Tests'
 
+# Code Coverage
 - script: echo "Code Coverage Completed"
   displayName: 'Code Coverage'
 
+# SonarQube
 - script: echo "SonarQube Analysis"
   displayName: 'SonarQube'
 
+# Security Scan
 - script: echo "Security Scan"
   displayName: 'Security Scan'
 
-- script: |
-    docker build -t node-devops-project .
-  displayName: 'Docker Build'
-
+# Build and Push Image to ACR
 - task: Docker@2
-  displayName: 'Docker Push'
+  displayName: 'Build and Push to ACR'
   inputs:
-    command: login
-    containerRegistry: 'dockerhub-connection'
+    command: buildAndPush
+    repository: 'node-devops-project'
+    dockerfile: 'Dockerfile'
+    containerRegistry: 'acr-connection'
+    tags: |
+      $(Build.BuildId)
 
-- script: |
-    docker tag node-devops-project jagadeesh1102/node-devops-project:$(Build.BuildId)
-    docker push jagadeesh1102/node-devops-project:$(Build.BuildId)
-  displayName: 'Push Image To Docker Hub'
-
+# Deploy to AKS
 - task: KubernetesManifest@1
-  displayName: Deploy to AKS
+  displayName: 'Deploy to AKS'
   inputs:
     action: deploy
-    kubernetesServiceConnection: aks-connection
-    namespace: default
+    kubernetesServiceConnection: 'aks-connection'
+    namespace: 'default'
     manifests: |
       k8s/deployment.yaml
       k8s/service.yaml
     containers: |
-      jagadeesh1102/node-devops-project:$(Build.BuildId)
+      nodedevopsacr123.azurecr.io/node-devops-project:$(Build.BuildId)
