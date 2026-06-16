@@ -50,3 +50,15 @@ steps:
     docker tag node-devops-project jagadeesh1102/node-devops-project:$(Build.BuildId)
     docker push jagadeesh1102/node-devops-project:$(Build.BuildId)
   displayName: 'Push Image To Docker Hub'
+
+- task: KubernetesManifest@1
+  displayName: Deploy to AKS
+  inputs:
+    action: deploy
+    kubernetesServiceConnection: aks-connection
+    namespace: default
+    manifests: |
+      k8s/deployment.yaml
+      k8s/service.yaml
+    containers: |
+      jagadeesh1102/node-devops-project:$(Build.BuildId)
